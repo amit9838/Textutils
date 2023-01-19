@@ -3,7 +3,7 @@ import About from './components/About'
 import './App.css';
 import TextForm from './components/TextForm.js';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -23,11 +23,13 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
-        {/* <Switch> */}
-          <Route exact path='/' component={TextForm} toggleTheme={toggleTheme} theme={theme} />
-          <Route exact path='/about' component={About} />
-        {/* </Switch> */}
+        <Navbar theme = {theme} title = "TextUtils" toggleTheme={toggleTheme}/>
+        {/* <TextForm exact path = '/' toggleTheme={toggleTheme} theme={theme}/> */}
+        {/* <About exact path = '/about'/> */}
+        <Routes>
+          <Route path='/'  element = {<TextForm key="textform"  toggleTheme={toggleTheme} theme={theme}/>} />
+          <Route path='/about'  element = {<About key="about" theme = {theme} />} />
+        </Routes>
       </Router>
     </>
   );
