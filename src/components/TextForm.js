@@ -112,7 +112,7 @@ export default function TextForm(props) {
 
           <div className="col-md-6 rounded">
             <span className="border-bottom fs-3">Summary</span>
-            <div className="processed m3-2 text-dark">
+            <div className="processed m-2">
               <p>
                 {text.split(" ").length} words and {text.length} Chacters
               </p>
