@@ -7,14 +7,25 @@ export default function TextForm(props) {
   const [isupper, setisUpper] = useState(false);
   const handleUPClick = () => {
     setisUpper(true);
+    console.log("adding test comment");
+
+
+
+
+
+
+
+
+
+    
     if (text.length !== 0) {
         //setLastUndo(text)
-    //  console.log("Converting to upper case");
+     console.log("Converting to upper case");
       setLastUndo([...lastUndo,text])
       let UCtext = text.toUpperCase();
       setText(UCtext);
     } else {
-     // console.log("Some text required to perform this operation.");
+     console.log("Some text required to perform this operation.");
     }
   };
   const handleUpperCase = (e) => {
