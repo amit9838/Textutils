@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function Navbar(props) {
   return (
     <>
-      <nav className={`navbar navbar-expand-lg navbar-${props.theme} bg-${props.theme}`}>
+      <nav className={`navbar navbar-expand-lg navbar-${props.theme} bg-${props.theme}`} style={{borderBottom:'2px solid grey'}}>
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">{props.title}</Link>
           <div className="right-ele d-flex  align--tems-center" >
