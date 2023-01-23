@@ -1,3 +1,4 @@
+import { Paper,Card, CardContent } from '@mui/material';
 import React, { useState } from 'react'
 
 export default function TextForm(props) {
@@ -89,7 +90,7 @@ export default function TextForm(props) {
           <div className="form-group col-md-6">
             <textarea
               className="form-control my-1 "
-              rows="6"
+              rows="10"
               value={text}
               onChange={handleUpperCase}
               style={{
@@ -121,15 +122,21 @@ export default function TextForm(props) {
             </button>
           </div>
 
-          <div className="col-md-6 rounded">
+          <div className="col-md-6 rounded" style={{paddingLeft:'10%'}}>
             <span className="border-bottom fs-3">Summary</span>
             <div className="processed m-2">
               <p>
                 {text.split(" ").length} words and {text.length} Chacters
               </p>
               <p>{0.008 * text.split(" ").length} Minutes read</p>
-              <span className="border-bottom fs-4">Preview</span>
-              <p>{text}</p>
+              <span className="border-bottom fs-4" style={{marginLeft:'40%'}}>Preview</span>
+              <Paper elevation={24} sx={{background:props.theme === "light" ? "white" :'#404040',marginTop:'20px'}}>
+                <Card sx={{background:props.theme === "light" ? "white" :'#404040'}}>
+                  <CardContent sx={{background:props.theme === "light" ? "white" :'#404040'}}>
+                  <p style={{textAlign:'center',overflow:'auto',color:props.theme !== "light" ? "white" :'black',maxWidth:'100%',wordWrap:'break-word',margin:'10px',padding:'10px'}}>{text}</p>
+                  </CardContent>
+                </Card>
+                </Paper>
             </div>
           </div>
         </div>
