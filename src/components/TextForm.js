@@ -1,4 +1,8 @@
-import { Paper,Card, CardContent } from '@mui/material';
+import { Paper,Card, CardContent,ToggleButton ,ToggleButtonGroup} from '@mui/material';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import React, { useState } from 'react'
 
 export default function TextForm(props) {
@@ -6,6 +10,7 @@ export default function TextForm(props) {
   const [lastUndo,setLastUndo]=useState([]);
  // const [lastRedo,setLastRedo]=useState([]);
   const [isupper, setisUpper] = useState(false);
+  const [alignment, setAlignment] = React.useState('left');
   const handleUPClick = () => {
     setisUpper(true);
     console.log("adding test comment");
@@ -29,6 +34,10 @@ export default function TextForm(props) {
      console.log("Some text required to perform this operation.");
     }
   };
+  function handleAlignment(e,newOne){
+    e.preventDefault()
+    setAlignment(newOne)
+  }
   const handleUpperCase = (e) => {
     //console.log("Converted Upper Case");
     setLastUndo([...lastUndo,text])
@@ -71,6 +80,20 @@ export default function TextForm(props) {
        setText(txt)}
     }
   }
+  const children = [
+    <ToggleButton value="left" key="left" sx={{borderColor:props.theme === "light" ?'black' :"white" }}>
+      <FormatAlignLeftIcon sx={{color:props.theme === "light" ?'black' :"white" }}/>
+    </ToggleButton>,
+    <ToggleButton value="center" key="center" sx={{borderColor:props.theme === "light" ?'black' :"white" }}>
+      <FormatAlignCenterIcon sx={{color:props.theme === "light" ?'black' :"white" }}/>
+    </ToggleButton>,
+    <ToggleButton value="right" key="right" sx={{borderColor:props.theme === "light" ?'black' :"white" }}>
+      <FormatAlignRightIcon sx={{color:props.theme === "light" ?'black' :"white" }}/>
+    </ToggleButton>,
+    <ToggleButton value="justify" key="justify" sx={{borderColor:props.theme === "light" ?'black' :"white" }}>
+      <FormatAlignJustifyIcon sx={{color:props.theme === "light" ?'black' :"white" }}/>
+    </ToggleButton>,
+  ];
 //   function handleRedoClick(){
 //     console.log(lastRedo)
 //     if(text.length!==0){
@@ -82,6 +105,11 @@ export default function TextForm(props) {
 //         console.log(lastRedo)
 //     }
 //   }
+const control = {
+  value: alignment,
+  onChange: handleAlignment,
+  exclusive: true,
+};
   return (
     <>
       <div className="container my-4">
@@ -90,7 +118,7 @@ export default function TextForm(props) {
           <div className="form-group col-md-6">
             <textarea
               className="form-control my-1 "
-              rows="10"
+              rows="15"
               value={text}
               onChange={handleUpperCase}
               style={{
@@ -126,14 +154,20 @@ export default function TextForm(props) {
             <span className="border-bottom fs-3">Summary</span>
             <div className="processed m-2">
               <p>
-                {text.split(" ").length} words and {text.length} Chacters
+                {text.split(" ").length} words and {text.length} Characters
               </p>
               <p>{0.008 * text.split(" ").length} Minutes read</p>
               <span className="border-bottom fs-4" style={{marginLeft:'40%'}}>Preview</span>
+              <br></br>
+              <span><ToggleButtonGroup size="small" {...control} aria-label="Small sizes" sx={{marginTop:'10px',marginBottom:'0',marginLeft:'0',paddingBottom:'0'}}>
+        {children}
+      </ToggleButtonGroup></span>
               <Paper elevation={24} sx={{background:props.theme === "light" ? "white" :'#404040',marginTop:'20px'}}>
                 <Card sx={{background:props.theme === "light" ? "white" :'#404040'}}>
                   <CardContent sx={{background:props.theme === "light" ? "white" :'#404040'}}>
-                  <p style={{textAlign:'center',overflow:'auto',color:props.theme !== "light" ? "white" :'black',maxWidth:'100%',wordWrap:'break-word',margin:'10px',padding:'10px'}}>{text}</p>
+                  <p style=
+                  {{textAlign:alignment,overflow:'auto',color:props.theme !== "light" ? "white" :'black',
+                  maxWidth:'100%',wordWrap:'break-word',margin:'10px',padding:'10px'}}>{text}</p>
                   </CardContent>
                 </Card>
                 </Paper>
